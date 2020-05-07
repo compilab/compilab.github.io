@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-05-07T15:29:10-03:00</updated><id>/feed.xml</id><title type="html">CompiLab</title><subtitle>© Copyright 2020 Compilab</subtitle><entry><title type="html">Explorando o .Net Core</title><link href="/post/explorando-dotnet-core" rel="alternate" type="text/html" title="Explorando o .Net Core" /><published>2020-05-07T00:00:00-03:00</published><updated>2020-05-07T00:00:00-03:00</updated><id>/post/explorando-dotnet-core</id><content type="html" xml:base="/post/explorando-dotnet-core">&lt;p&gt;Saudações confederados!&lt;/p&gt;
+
+&lt;p&gt;Você já ouviu falar em .Net core?
+Pois bem, diferentemente da plataforma .net framework, que trabalha apenas em sistema operacional Windows, o .net Core é uma plataforma desenvolvida pela Microsoft, que opera tanto em Windows, Linux e MacOs. Com ela você pode continuar com o Linux Debian, codar em C# e gerar dlls e todos aqueles artefatos que só viamos no windows. Ficou curioso em como isso funciona? Então esse artigo é para você.&lt;/p&gt;
+
+&lt;h2 id=&quot;introdução&quot;&gt;Introdução&lt;/h2&gt;
+&lt;p&gt;O .Net core é uma revolução vinda da microsoft, pois o .net core é uma plataforma cruzada e de código aberto. Isso mesmo que você leu, código aberto. Quem imaginou isso um dia?&lt;/p&gt;
+
+&lt;p&gt;Para utilizarmos o .net Core, vamos precisar instalar o SDK, mas o que é um SDK?&lt;/p&gt;
+
+&lt;p&gt;O SDK &lt;em&gt;(Software development kit)&lt;/em&gt; do .net Core é um conjunto de bibliotecas e ferramentas que permite o desenvolvimento de aplicações, o download pode ser feito no &lt;a href=&quot;https://dotnet.microsoft.com/download&quot;&gt;site da microsoft&lt;/a&gt;, você só precisa escolher seu SO e baixa-lo. Simples assim :)&lt;/p&gt;
+
+&lt;p&gt;O SDK inclue alguns componentes, sendo eles:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;O CLI&lt;/li&gt;
+  &lt;li&gt;O Runtime&lt;/li&gt;
+  &lt;li&gt;O driver dotnet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;O &lt;strong&gt;CLI&lt;/strong&gt; do .net Core são ferramentas para o desenvolvimento, construção, execução e publicação de suas aplicações. O CLI também disponibiliza alguns comandos, que por sinal são bem intuitivos, como o comando &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet new [options]&lt;/code&gt; para criar uma aplicação, ou &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet build&lt;/code&gt; para realizar o build de sua aplicação. Todos os comandos podem ser visualizados com o comando &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet --help&lt;/code&gt; ou na página &lt;a href=&quot;https://docs.microsoft.com/pt-br/dotnet/core/tools/&quot;&gt;microsoft docs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Falando no comando &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnew new ...&lt;/code&gt;, vou te mostrar algo interesse. Abra o terminal e digite &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet new --help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-terminal&quot; data-lang=&quot;terminal&quot;&gt;&lt;span class=&quot;go&quot;&gt;Templates                               Short Name               Language          Tags  
+-------------------------------------------------------------------------------------------------
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;Console Application                     console                  [C#&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;, F#, VB      Common/Console                       
+&lt;span class=&quot;gp&quot;&gt;Class library                           classlib                 [C#&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;, F#, VB      Common/Library                       
+&lt;span class=&quot;gp&quot;&gt;WPF Application                         wpf                      [C#&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;              Common/WPF                           
+&lt;span class=&quot;gp&quot;&gt;WPF Class library                       wpflib                   [C#&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;              Common/WPF        
+&lt;span class=&quot;go&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;...        &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Se você executou o comando, você pode ver uma tabela em sua tela, que por sinal é bem maior que essa, eu selecionei apenas as primeiras linhas para mostrar a magnificência do .net Core.&lt;/p&gt;
+
+&lt;p&gt;Essa tabela representa que tipo de projeto você deseja criar e em qual linguagem. Você quer desevolver uma aplicação web? uma api? uma lib? Bom, o .net core é generoso e nos entrega um template base para o desenvolvimento. Utilizando o shortname, você pode inicar um projeto rapidamente, por exemplo: &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet new classlib -o mylib&lt;/code&gt;, estou dizendo ao dotnet para criar um novo projeto do tipo classlib dentro do diretorio mylib.&lt;/p&gt;
+
+&lt;p&gt;Um outro ponto bem interessante é que a plataforma .net Core já nos disponibilza três linguagens de programação (veja na terceira coluna da tabela), sendo elas C#, F# e VB.&lt;/p&gt;
+
+&lt;p&gt;Incrivel, não?  Bom, estamos apenas começando, vamos para o próximo item do SDK, o runtime.&lt;/p&gt;
+
+&lt;p&gt;O &lt;strong&gt;Runtime&lt;/strong&gt;, bem resumidamente, ajuda a facilitar o processo de desenvolvimento fornecendo os vários serviços. No universo .net Core, o runtime utilizado é o &lt;strong&gt;CoreCLR&lt;/strong&gt; &lt;em&gt;(Core Common Language Runtime)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Acima vimos que o .net Core já nos disponibliza três linguagens de programação, e ai você deve estar se perguntando, como o CoreCLR gerencia tudo isso?&lt;/p&gt;
+
+&lt;p&gt;Para cada linguagem da plataforma .net core, há um complicador especifico que implementa as especificações chamadas de &lt;strong&gt;CLS&lt;/strong&gt; &lt;em&gt;(Common language Specification)&lt;/em&gt;, que basicamente definem uma série de padrões que o compilador deve seguir para corresponder um bytecode chamado &lt;strong&gt;CIL&lt;/strong&gt; &lt;em&gt;(Common Intermediate Language)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Um pouco Confuso?&lt;/p&gt;
+
+&lt;p&gt;Veja assim, independente da linguagem que você use na plataforma .net Core, os seus respectivos compilares irão gerar um CIL. Pois o CIL é a linguagem que o CoreCLR trabalha. Se você é um programador java, fica bem mais fácil de entender, você pode ver o CIL como bytecode e o o CoreCLR com a JVM.&lt;/p&gt;
+
+&lt;p&gt;Legal, então depois de convertermos as linguagens para o CIL, o que acontece? O que o CoreCLR faz internamente é incluir o &lt;strong&gt;JIT&lt;/strong&gt; &lt;em&gt;(Just-in-time)&lt;/em&gt; para compilar o código CIL em código de máquina na medida em que vamos interagindo com a aplicação.&lt;/p&gt;
+
+&lt;p&gt;Isso tudo é muito incrível, pois independente da linguagem utilizada, ela será traduzida ao CIL e compilada pelo JIT. Tratando-se disso, tais artefatos permitem que as linguagens se comuniquem pelo CIL e  que a compilação seja feita em tempo de execução.&lt;/p&gt;
+
+&lt;p&gt;Tem algo mais?&lt;/p&gt;
+
+&lt;p&gt;Sim! Além do JIT e do CLS, o CoreCLR também tem o &lt;strong&gt;GC&lt;/strong&gt; &lt;em&gt;(Garbage Collector)&lt;/em&gt; e o &lt;strong&gt;CTS&lt;/strong&gt; &lt;em&gt;(Common Type System)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;O GC explicarei em futuro artigo, onde falaremos sobre seus algoritmos, mas para  entendermos o CoreCLR irei dar uma breve descrição do Garbage Collector. o GC é responsável por fornecer e gerenciar automaticamente a memória. É um dos componentes mais importante para uma VM &lt;em&gt;(Virtual Machine)&lt;/em&gt;, e portanto falaremos dele detalhadamente em um artigo posterior, mas é importante que você saiba que ele é o responsável pelo gerenciamento de memória.&lt;/p&gt;
+
+&lt;p&gt;O CTS é o descritor dos tipos de dados. Vimos que a plataforma .net core é composta por várias linguagens, e cada linguagem tem seus tipos de dados. É aqui que surge a necessidade do CTS, sendo responsável por entender todo o sistema de tipos de dados das linguagens do .net Core e traduzi-los em um modo que o CoreCLR possa entende-los.&lt;/p&gt;
+
+&lt;p&gt;Lendo um artigo do Dawid Sibiński, no  CodeJorney, vi uma imagem que me ajudou a entender mais facilmente todo esses componentes e seus processos.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i0.wp.com/www.codejourney.net/wp-content/uploads/2018/10/NetExecutionModel.png?w=639&amp;amp;ssl=1&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;concluindo&quot;&gt;Concluindo&lt;/h2&gt;
+
+&lt;p&gt;Bastante informação? Sim! Mas com foco, &lt;strong&gt;paciencia&lt;/strong&gt; e tempo, você pode ir muito além desse artigo. Use a imagem acima como um mapa, releia o artigo, escreva no &lt;strong&gt;papel&lt;/strong&gt; a definição de cada componente, e estude também por outras fontes. Deixarei algumas logo abaixo.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Aquitetura de execução .Net - &lt;a href=&quot;https://www.codejourney.net/2018/10/net-internals-10-application-execution-model/&quot;&gt;CodeJorney&lt;/a&gt;  (ingles)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;JIT - &lt;a href=&quot;https://pt.wikipedia.org/wiki/JIT&quot;&gt;wikipedia&lt;/a&gt; (português)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Guia .Net Core - &lt;a href=&quot;https://docs.microsoft.com/pt-br/dotnet/core/&quot;&gt;Microsft Doc&lt;/a&gt; (português)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;CoreCLR - &lt;a href=&quot;https://www.geeksforgeeks.org/common-language-runtime-clr-in-c-sharp/&quot;&gt;GeeksforGeeks&lt;/a&gt; (inglês)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bons estudos!&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;“write once run anywhere”&lt;/em&gt; -  Sun MicroSystems&lt;/p&gt;</content><author><name>Bruno Bastos</name></author><summary type="html">Saudações confederados!</summary></entry><entry><title type="html">Gerenciando serviços com systemctl</title><link href="/post/gerenciando-servicos-com-systemctl" rel="alternate" type="text/html" title="Gerenciando serviços com systemctl" /><published>2020-05-05T00:00:00-03:00</published><updated>2020-05-05T00:00:00-03:00</updated><id>/post/gerenciando-servicos-com-systemctl</id><content type="html" xml:base="/post/gerenciando-servicos-com-systemctl">&lt;p&gt;Saudações confederados!&lt;/p&gt;
+
+&lt;p&gt;Gerenciar os serviços em seu SO pode parecer um pouco confuso se você é um iniciante no Linux. Nesse tutorial iremos conhecer os recursos básicos para gerenciarmos nossos serviços.&lt;/p&gt;
+
+&lt;h2 id=&quot;introdução&quot;&gt;Introdução&lt;/h2&gt;
+&lt;p&gt;Um serviço Linux, bem resumidamente é um &lt;em&gt;daemon&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;O daemon é um programa que roda em &lt;em&gt;background&lt;/em&gt;, ou seja, ele trabalha em plano de fundo em vez de estar sob controle direto do usuário. Se você tem algum servidor http &lt;em&gt;(apache, nginx)&lt;/em&gt; instalado em sua máquina, ou algum banco de dados &lt;em&gt;(mysql, mariadb, postgreSql)&lt;/em&gt;, você já deve ter notado que eles iniciam automaticamente assim que o sistema é liberado para uso, mas como isso é possível? Cortesia do Systemd.&lt;/p&gt;
+
+&lt;p&gt;O Systemd é o primeiro processo que assume controle do kernel após o boot. Sendo assim, os daemons são carregados a partir dele. Ora, então todos os meus serviços que iniciam automaticamente &lt;em&gt;(mariadb, nginx, …)&lt;/em&gt; são inicializados pelo Systemd?&lt;/p&gt;
+
+&lt;p&gt;Sim, e tem mais!&lt;/p&gt;
+
+&lt;p&gt;Para interagirmos com o Systemd nós utilizamos o comando systemctl, que nos fornece alguns recursos como habilitar e desabilitar um serviço &lt;em&gt;(nosso objetivo)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;gerenciando-serviços&quot;&gt;Gerenciando Serviços&lt;/h2&gt;
+&lt;p&gt;Abra seu terminal e digite o seguinte comando:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;systemctl list-unit-files &lt;span class=&quot;nt&quot;&gt;--type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;service&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Você receberá uma lista com todos os seus serviços, parecida com essa.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;UNIT FILE                                  STATE          
+&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;...            
+&lt;/span&gt;&lt;span class=&quot;go&quot;&gt;apache2.service                            disabled       
+apache2@.service                           disabled  
+postgresql.service                         enabled        
+&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Antes de entendermos essa lista vamos entender o nosso comando.&lt;/p&gt;
+
+&lt;p&gt;O &lt;strong&gt;systemctl&lt;/strong&gt; recebe como parametro o &lt;code class=&quot;highlighter-rouge&quot;&gt;list-unit-files&lt;/code&gt;, que irá listar todos os arquivos instalados, em &lt;code class=&quot;highlighter-rouge&quot;&gt;type=service&lt;/code&gt;, filtramos para trazer apenas os serviços.&lt;/p&gt;
+
+&lt;p&gt;Nosso resultado é composto por duas colunas, representada pelo nome do serviço e seu respectivo status. Observe que o meu serviço do postgresql está habilitado, ou seja, quando meu sistema operacional inicializar, o postgresql será inicializado também.&lt;/p&gt;
+
+&lt;p&gt;Para desativar um serviço na inicialização utilize o seguinte comando, alterando  [service_name] para o serviço que deseja desativar:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl disable &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;service_name]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Caso deseja ativar o serviço novamente, utilize o seguinte comando:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;service_name]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Se você digitar o &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl list-unit-files --type=service&lt;/code&gt; em seu terminal, e buscar os serviços que desativou, verá que agora eles estão disable. Porém isso não significa que esses serviços não estejam rodando, para verificar se um serviço está ou não rodando, você pode executar o seguinte comando:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;systemctl status &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;service_name]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;A saidá será algo assim:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;● postgresql.service - PostgreSQL RDBMS
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;   Loaded: loaded (/lib/systemd/system/postgresql.service;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;disabled&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; vendor preset: enabled&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;   Active: active (exited) since Tue 2020-05-05 10:42:03 -03;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;2h 49min ago
+&lt;span class=&quot;go&quot;&gt; Main PID: 2125 (code=exited, status=0/SUCCESS)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Observe o &lt;code class=&quot;highlighter-rouge&quot;&gt;Active:active&lt;/code&gt;, isso significa que nosso serviço está rodando, para desativa-lo na sessão atual você pode executar o seguinte comando:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;systemctl stop &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;service_name]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;E para iniciar um serviço, você pode executar:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;systemctl start &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;service_name]&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;conclusão&quot;&gt;Conclusão&lt;/h2&gt;
+&lt;p&gt;Aprendemos o básico sobre o Systemctl e Systemd, eu espero que a leitura tenha sido proveitosa e o conhecimento adquirido. As recomendações são, leia sobre o Systemd, Systemcli e repasse o conhecimento.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;“Tudo vale a pena quando a alma não é pequena”&lt;/em&gt; - Fernando Pessoa&lt;/p&gt;</content><author><name>Bruno Bastos</name></author><summary type="html">Saudações confederados!</summary></entry></feed>
