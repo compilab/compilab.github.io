@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Gerenciando serviços com systemctl | CompiLab</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Gerenciando serviços com systemctl" />
+<meta name="author" content="Bruno Bastos" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Saudações confederados!" />
+<meta property="og:description" content="Saudações confederados!" />
+<link rel="canonical" href="https://compilab.github.io//post/gerenciando-servicos-com-systemctl" />
+<meta property="og:url" content="https://compilab.github.io//post/gerenciando-servicos-com-systemctl" />
+<meta property="og:site_name" content="CompiLab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-05T00:00:00-03:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://compilab.github.io//post/gerenciando-servicos-com-systemctl"},"url":"https://compilab.github.io//post/gerenciando-servicos-com-systemctl","headline":"Gerenciando serviços com systemctl","dateModified":"2020-05-05T00:00:00-03:00","datePublished":"2020-05-05T00:00:00-03:00","author":{"@type":"Person","name":"Bruno Bastos"},"description":"Saudações confederados!","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" type="imagem/png" href="/assets/logo.png" />
+  <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://compilab.github.io//feed.xml" title="CompiLab" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">
+      CompiLab <img width="15px" src="../assets/logo.png">
+    </a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="/">Home</a>
+          <a class="page-link" href="/sobre">Sobre</a>
+          <a class="page-link" href="/tag">Tags</a>
+         
+          <!--<a class="page-link" href="/sobre/">Sobre</a><a class="page-link" href="/tag/">Tags</a>-->
+
+
+        </div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Gerenciando serviços com systemctl</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-05-05T00:00:00-03:00" itemprop="datePublished">May 5, 2020
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Bruno Bastos</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Saudações confederados!</p>
+
+<p>Gerenciar os serviços em seu SO pode parecer um pouco confuso se você é um iniciante no Linux. Nesse tutorial iremos conhecer os recursos básicos para gerenciarmos nossos serviços.</p>
+
+<h2 id="introdução">Introdução</h2>
+<p>Um serviço Linux, bem resumidamente é um <em>daemon</em>.</p>
+
+<p>O daemon é um programa que roda em <em>background</em>, ou seja, ele trabalha em plano de fundo em vez de estar sob controle direto do usuário. Se você tem algum servidor http <em>(apache, nginx)</em> instalado em sua máquina, ou algum banco de dados <em>(mysql, mariadb, postgreSql)</em>, você já deve ter notado que eles iniciam automaticamente assim que o sistema é liberado para uso, mas como isso é possível? Cortesia do Systemd.</p>
+
+<p>O Systemd é o primeiro processo que assume controle do kernel após o boot. Sendo assim, os daemons são carregados a partir dele. Ora, então todos os meus serviços que iniciam automaticamente <em>(mariadb, nginx, …)</em> são inicializados pelo Systemd?</p>
+
+<p>Sim, e tem mais!</p>
+
+<p>Para interagirmos com o Systemd nós utilizamos o comando systemctl, que nos fornece alguns recursos como habilitar e desabilitar um serviço <em>(nosso objetivo)</em>.</p>
+
+<h2 id="gerenciando-serviços">Gerenciando Serviços</h2>
+<p>Abra seu terminal e digite o seguinte comando:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span><span class="w"> </span>systemctl list-unit-files <span class="nt">--type</span><span class="o">=</span>service</code></pre></figure>
+
+<p>Você receberá uma lista com todos os seus serviços, parecida com essa.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">UNIT FILE                                  STATE          
+</span><span class="c">...            
+</span><span class="go">apache2.service                            disabled       
+apache2@.service                           disabled  
+postgresql.service                         enabled        
+</span><span class="c">...</span></code></pre></figure>
+
+<p>Antes de entendermos essa lista vamos entender o nosso comando.</p>
+
+<p>O <strong>systemctl</strong> recebe como parametro o <code class="highlighter-rouge">list-unit-files</code>, que irá listar todos os arquivos instalados, em <code class="highlighter-rouge">type=service</code>, filtramos para trazer apenas os serviços.</p>
+
+<p>Nosso resultado é composto por duas colunas, representada pelo nome do serviço e seu respectivo status. Observe que o meu serviço do postgresql está habilitado, ou seja, quando meu sistema operacional inicializar, o postgresql será inicializado também.</p>
+
+<p>Para desativar um serviço na inicialização utilize o seguinte comando, alterando  [service_name] para o serviço que deseja desativar:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl disable <span class="o">[</span>service_name]</code></pre></figure>
+
+<p>Caso deseja ativar o serviço novamente, utilize o seguinte comando:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="o">[</span>service_name]</code></pre></figure>
+
+<p>Se você digitar o <code class="highlighter-rouge">systemctl list-unit-files --type=service</code> em seu terminal, e buscar os serviços que desativou, verá que agora eles estão disable. Porém isso não significa que esses serviços não estejam rodando, para verificar se um serviço está ou não rodando, você pode executar o seguinte comando:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span><span class="w"> </span>systemctl status <span class="o">[</span>service_name]</code></pre></figure>
+
+<p>A saidá será algo assim:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">● postgresql.service - PostgreSQL RDBMS
+</span><span class="gp">   Loaded: loaded (/lib/systemd/system/postgresql.service;</span><span class="w"> </span>disabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+<span class="gp">   Active: active (exited) since Tue 2020-05-05 10:42:03 -03;</span><span class="w"> </span>2h 49min ago
+<span class="go"> Main PID: 2125 (code=exited, status=0/SUCCESS)</span></code></pre></figure>
+
+<p>Observe o <code class="highlighter-rouge">Active:active</code>, isso significa que nosso serviço está rodando, para desativa-lo na sessão atual você pode executar o seguinte comando:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span><span class="w"> </span>systemctl stop <span class="o">[</span>service_name]</code></pre></figure>
+
+<p>E para iniciar um serviço, você pode executar:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span><span class="w"> </span>systemctl start <span class="o">[</span>service_name]</code></pre></figure>
+
+<h2 id="conclusão">Conclusão</h2>
+<p>Aprendemos o básico sobre o Systemctl e Systemd, eu espero que a leitura tenha sido proveitosa e o conhecimento adquirido. As recomendações são, leia sobre o Systemd, Systemcli e repasse o conhecimento.</p>
+
+<p><em>“Tudo vale a pena quando a alma não é pequena”</em> - Fernando Pessoa</p>
+
+  </div>
+
+  <div class="post-meta">
+    <strong>Tags</strong> 
+    <ul class="post-tag">
+      
+      <a href="/tag/linux"><li class="post-tag-item">#linux</li></a> 
+      
+    </ul>
+  </div><div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://compilab.github.io//post/gerenciando-servicos-com-systemctl';
+      this.page.identifier = 'https://compilab.github.io//post/gerenciando-servicos-com-systemctl';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://compilab.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><!-- <a class="u-url" href="/post/gerenciando-servicos-com-systemctl" hidden></a> -->
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+
+      <div class="footer-col footer-col">
+        <span class="post-meta">
+         Created my free logo at <a href="https://logomakr.com/2IZJnb"> LogoMakr.com</a>        
+        </span>
+      </div>
+      <div class="footer-col footer-col">
+          |
+        </div>
+
+      <div class="footer-col footer-col">© Copyright 2020 Compilab</div>
+
+
+    </div>
+
+
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Explorando o .Net Core | CompiLab</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Explorando o .Net Core" />
+<meta name="author" content="Bruno Bastos" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Saudações confederados!" />
+<meta property="og:description" content="Saudações confederados!" />
+<link rel="canonical" href="https://compilab.github.io//post/explorando-dotnet-core" />
+<meta property="og:url" content="https://compilab.github.io//post/explorando-dotnet-core" />
+<meta property="og:site_name" content="CompiLab" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-07T00:00:00-03:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://compilab.github.io//post/explorando-dotnet-core"},"url":"https://compilab.github.io//post/explorando-dotnet-core","headline":"Explorando o .Net Core","dateModified":"2020-05-07T00:00:00-03:00","datePublished":"2020-05-07T00:00:00-03:00","author":{"@type":"Person","name":"Bruno Bastos"},"description":"Saudações confederados!","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" type="imagem/png" href="/assets/logo.png" />
+  <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://compilab.github.io//feed.xml" title="CompiLab" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">
+      CompiLab <img width="15px" src="../assets/logo.png">
+    </a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="/">Home</a>
+          <a class="page-link" href="/sobre">Sobre</a>
+          <a class="page-link" href="/tag">Tags</a>
+         
+          <!--<a class="page-link" href="/sobre/">Sobre</a><a class="page-link" href="/tag/">Tags</a>-->
+
+
+        </div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Explorando o .Net Core</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-05-07T00:00:00-03:00" itemprop="datePublished">May 7, 2020
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Bruno Bastos</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Saudações confederados!</p>
+
+<p>Você já ouviu falar em .Net core?
+Pois bem, diferentemente da plataforma .net framework, que trabalha apenas em sistema operacional Windows, o .net Core é uma plataforma desenvolvida pela Microsoft, que opera tanto em Windows, Linux e MacOs. Com ela você pode continuar com o Linux Debian, codar em C# e gerar dlls e todos aqueles artefatos que só viamos no windows. Ficou curioso em como isso funciona? Então esse artigo é para você.</p>
+
+<h2 id="introdução">Introdução</h2>
+<p>O .Net core é uma revolução vinda da microsoft, pois o .net core é uma plataforma cruzada e de código aberto. Isso mesmo que você leu, código aberto. Quem imaginou isso um dia?</p>
+
+<p>Para utilizarmos o .net Core, vamos precisar instalar o SDK, mas o que é um SDK?</p>
+
+<p>O SDK <em>(Software development kit)</em> do .net Core é um conjunto de bibliotecas e ferramentas que permite o desenvolvimento de aplicações, o download pode ser feito no <a href="https://dotnet.microsoft.com/download">site da microsoft</a>, você só precisa escolher seu SO e baixa-lo. Simples assim :)</p>
+
+<p>O SDK inclue alguns componentes, sendo eles:</p>
+<ul>
+  <li>O CLI</li>
+  <li>O Runtime</li>
+  <li>O driver dotnet</li>
+</ul>
+
+<p>O <strong>CLI</strong> do .net Core são ferramentas para o desenvolvimento, construção, execução e publicação de suas aplicações. O CLI também disponibiliza alguns comandos, que por sinal são bem intuitivos, como o comando <code class="highlighter-rouge">dotnet new [options]</code> para criar uma aplicação, ou <code class="highlighter-rouge">dotnet build</code> para realizar o build de sua aplicação. Todos os comandos podem ser visualizados com o comando <code class="highlighter-rouge">dotnet --help</code> ou na página <a href="https://docs.microsoft.com/pt-br/dotnet/core/tools/">microsoft docs</a>.</p>
+
+<p>Falando no comando <code class="highlighter-rouge">dotnew new ...</code>, vou te mostrar algo interesse. Abra o terminal e digite <code class="highlighter-rouge">dotnet new --help</code>.</p>
+
+<figure class="highlight"><pre><code class="language-terminal" data-lang="terminal"><span class="go">Templates                               Short Name               Language          Tags  
+-------------------------------------------------------------------------------------------------
+</span><span class="gp">Console Application                     console                  [C#</span><span class="o">]</span>, F#, VB      Common/Console                       
+<span class="gp">Class library                           classlib                 [C#</span><span class="o">]</span>, F#, VB      Common/Library                       
+<span class="gp">WPF Application                         wpf                      [C#</span><span class="o">]</span>              Common/WPF                           
+<span class="gp">WPF Class library                       wpflib                   [C#</span><span class="o">]</span>              Common/WPF        
+<span class="go">
+</span><span class="c">...        </span></code></pre></figure>
+
+<p>Se você executou o comando, você pode ver uma tabela em sua tela, que por sinal é bem maior que essa, eu selecionei apenas as primeiras linhas para mostrar a magnificência do .net Core.</p>
+
+<p>Essa tabela representa que tipo de projeto você deseja criar e em qual linguagem. Você quer desevolver uma aplicação web? uma api? uma lib? Bom, o .net core é generoso e nos entrega um template base para o desenvolvimento. Utilizando o shortname, você pode inicar um projeto rapidamente, por exemplo: <code class="highlighter-rouge">dotnet new classlib -o mylib</code>, estou dizendo ao dotnet para criar um novo projeto do tipo classlib dentro do diretorio mylib.</p>
+
+<p>Um outro ponto bem interessante é que a plataforma .net Core já nos disponibilza três linguagens de programação (veja na terceira coluna da tabela), sendo elas C#, F# e VB.</p>
+
+<p>Incrivel, não?  Bom, estamos apenas começando, vamos para o próximo item do SDK, o runtime.</p>
+
+<p>O <strong>Runtime</strong>, bem resumidamente, ajuda a facilitar o processo de desenvolvimento fornecendo os vários serviços. No universo .net Core, o runtime utilizado é o <strong>CoreCLR</strong> <em>(Core Common Language Runtime)</em>.</p>
+
+<p>Acima vimos que o .net Core já nos disponibliza três linguagens de programação, e ai você deve estar se perguntando, como o CoreCLR gerencia tudo isso?</p>
+
+<p>Para cada linguagem da plataforma .net core, há um complicador especifico que implementa as especificações chamadas de <strong>CLS</strong> <em>(Common language Specification)</em>, que basicamente definem uma série de padrões que o compilador deve seguir para corresponder um bytecode chamado <strong>CIL</strong> <em>(Common Intermediate Language)</em>.</p>
+
+<p>Um pouco Confuso?</p>
+
+<p>Veja assim, independente da linguagem que você use na plataforma .net Core, os seus respectivos compilares irão gerar um CIL. Pois o CIL é a linguagem que o CoreCLR trabalha. Se você é um programador java, fica bem mais fácil de entender, você pode ver o CIL como bytecode e o o CoreCLR com a JVM.</p>
+
+<p>Legal, então depois de convertermos as linguagens para o CIL, o que acontece? O que o CoreCLR faz internamente é incluir o <strong>JIT</strong> <em>(Just-in-time)</em> para compilar o código CIL em código de máquina na medida em que vamos interagindo com a aplicação.</p>
+
+<p>Isso tudo é muito incrível, pois independente da linguagem utilizada, ela será traduzida ao CIL e compilada pelo JIT. Tratando-se disso, tais artefatos permitem que as linguagens se comuniquem pelo CIL e  que a compilação seja feita em tempo de execução.</p>
+
+<p>Tem algo mais?</p>
+
+<p>Sim! Além do JIT e do CLS, o CoreCLR também tem o <strong>GC</strong> <em>(Garbage Collector)</em> e o <strong>CTS</strong> <em>(Common Type System)</em>.</p>
+
+<p>O GC explicarei em futuro artigo, onde falaremos sobre seus algoritmos, mas para  entendermos o CoreCLR irei dar uma breve descrição do Garbage Collector. o GC é responsável por fornecer e gerenciar automaticamente a memória. É um dos componentes mais importante para uma VM <em>(Virtual Machine)</em>, e portanto falaremos dele detalhadamente em um artigo posterior, mas é importante que você saiba que ele é o responsável pelo gerenciamento de memória.</p>
+
+<p>O CTS é o descritor dos tipos de dados. Vimos que a plataforma .net core é composta por várias linguagens, e cada linguagem tem seus tipos de dados. É aqui que surge a necessidade do CTS, sendo responsável por entender todo o sistema de tipos de dados das linguagens do .net Core e traduzi-los em um modo que o CoreCLR possa entende-los.</p>
+
+<p>Lendo um artigo do Dawid Sibiński, no  CodeJorney, vi uma imagem que me ajudou a entender mais facilmente todo esses componentes e seus processos.</p>
+
+<p><img src="https://i0.wp.com/www.codejourney.net/wp-content/uploads/2018/10/NetExecutionModel.png?w=639&amp;ssl=1" /></p>
+
+<h2 id="concluindo">Concluindo</h2>
+
+<p>Bastante informação? Sim! Mas com foco, <strong>paciencia</strong> e tempo, você pode ir muito além desse artigo. Use a imagem acima como um mapa, releia o artigo, escreva no <strong>papel</strong> a definição de cada componente, e estude também por outras fontes. Deixarei algumas logo abaixo.</p>
+
+<ul>
+  <li>
+    <p>Aquitetura de execução .Net - <a href="https://www.codejourney.net/2018/10/net-internals-10-application-execution-model/">CodeJorney</a>  (ingles)</p>
+  </li>
+  <li>
+    <p>JIT - <a href="https://pt.wikipedia.org/wiki/JIT">wikipedia</a> (português)</p>
+  </li>
+  <li>
+    <p>Guia .Net Core - <a href="https://docs.microsoft.com/pt-br/dotnet/core/">Microsft Doc</a> (português)</p>
+  </li>
+  <li>
+    <p>CoreCLR - <a href="https://www.geeksforgeeks.org/common-language-runtime-clr-in-c-sharp/">GeeksforGeeks</a> (inglês)</p>
+  </li>
+</ul>
+
+<p>Bons estudos!</p>
+
+<p><em>“write once run anywhere”</em> -  Sun MicroSystems</p>
+
+  </div>
+
+  <div class="post-meta">
+    <strong>Tags</strong> 
+    <ul class="post-tag">
+      
+      <a href="/tag/dotnet"><li class="post-tag-item">#dotnet</li></a> 
+      
+    </ul>
+  </div><div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://compilab.github.io//post/explorando-dotnet-core';
+      this.page.identifier = 'https://compilab.github.io//post/explorando-dotnet-core';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://compilab.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><!-- <a class="u-url" href="/post/explorando-dotnet-core" hidden></a> -->
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+
+      <div class="footer-col footer-col">
+        <span class="post-meta">
+         Created my free logo at <a href="https://logomakr.com/2IZJnb"> LogoMakr.com</a>        
+        </span>
+      </div>
+      <div class="footer-col footer-col">
+          |
+        </div>
+
+      <div class="footer-col footer-col">© Copyright 2020 Compilab</div>
+
+
+    </div>
+
+
+
+  </div>
+
+</footer>
+</body>
+
+</html>
